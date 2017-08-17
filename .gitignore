@@ -1,2 +1,4 @@
-bin/*
 pkg/*
+.idea/*
+bin/fileserver
+bin/fileserver.exe
