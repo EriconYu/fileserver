@@ -57,13 +57,18 @@ func main() {
 
 	//以下代码需要访问公网
 	req := httplib.Get("http://getip.stackbang.com")
+	req.SetTimeout(time.Second, time.Second)
 	externalip, err := req.String()
 	if err != nil {
 		fmt.Println("\t获取公网地址失败：")
 		fmt.Println("\t", err)
 	} else {
-		strs := strings.Split(externalip, ",")
-		fmt.Println("\t" + strs[2][14:])
+		if strings.Contains(externalip, "X-Real-IP") {
+			strs := strings.Split(externalip, ",")
+			fmt.Println("\t" + strs[2][14:])
+		} else {
+			fmt.Println("\t获取公网地址失败：")
+		}
 	}
 
 	fmt.Printf("\t在浏览器中访问http://对应网卡的ip%s即可\n", port)
