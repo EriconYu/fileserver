@@ -57,7 +57,6 @@ func main() {
 
 	//以下代码需要访问公网
 	req := httplib.Get("http://getip.stackbang.com")
-	req.SetTimeout(1, 0)
 	externalip, err := req.String()
 	if err != nil {
 		fmt.Println("\t获取公网地址失败：")
